@@ -11,7 +11,7 @@ Entry App for [Context.io App Challenge](http://contextio.challengepost.com/)
 
 ## Testing
 
-- munit tests: ``` meteor test-packages worm-tests ```
+- munit tests: ```meteor test-packages worm-tests --port 1234```
 
 ## Dependencies
 
