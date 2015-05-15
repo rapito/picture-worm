@@ -3,12 +3,12 @@
     "app": {
       "title": "Picture Worm",
       "version": "0.0.0"
-    },
-    "services": {
-      "contextio": {
-        "key": "1j9gnir6",
-        "secret": "s4fj0FqVHfQX2qC2"
-      }
+    }
+  },
+  "services": {
+    "contextio": {
+      "key": "1j9gnir6",
+      "secret": "s4fj0FqVHfQX2qC2"
     }
   }
 }

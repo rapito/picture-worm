@@ -9,6 +9,7 @@ node_modules/
 
 # ignore npm packages, let meteor add them
 packages/npm-container/
+packages/**/.npm/
 
 .idea/
 *.iml
