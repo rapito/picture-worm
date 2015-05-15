@@ -3,6 +3,7 @@
 *.sublime-workspace
 dump
 settings.json
+settings.prod.json
 
 node_modules/
 

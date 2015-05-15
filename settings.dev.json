@@ -5,10 +5,9 @@
       "version": "0.0.0"
     },
     "services": {
-      "twitter": {
-        "oauth_key": "<oauth_key>",
-        "oauth_secret": "<oauth_secret>",
-        "api_key": "<api_key>"
+      "contextio": {
+        "key": "1j9gnir6",
+        "secret": "s4fj0FqVHfQX2qC2"
       }
     }
   }

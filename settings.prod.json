@@ -3,20 +3,12 @@
     "app": {
       "title": "Picture Worm",
       "version": "0.0.0"
-    }
-  },
-  "production": {
-    "twitter": {
-      "oauth_key": "<oauth_key>",
-      "oauth_secret": "<oauth_secret>",
-      "api_key": "<api_key>"
-    }
-  },
-  "development": {
-    "twitter": {
-      "oauth_key": "<oauth_key>",
-      "oauth_secret": "<oauth_secret>",
-      "api_key": "<api_key>"
+    },
+    "services": {
+      "contextio": {
+        "key": "1j9gnir6",
+        "secret": "s4fj0FqVHfQX2qC2"
+      }
     }
   }
 }
