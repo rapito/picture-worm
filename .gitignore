@@ -4,6 +4,8 @@
 dump
 settings.json
 
+node_modules/
+
 # ignore npm packages, let meteor add them
 packages/npm-container/
 

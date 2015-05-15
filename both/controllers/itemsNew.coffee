@@ -1,0 +1,1 @@
+@ItemsNewController = AppController.extend({})
