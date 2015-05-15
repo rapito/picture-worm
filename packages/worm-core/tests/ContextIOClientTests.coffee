@@ -17,7 +17,7 @@ class ContextIOClientTests
       expect(@wrapper).to.be.an.instanceof(ContextIOClient);
 
     it 'should have same keys', (test) ->
-      console.log 'should be constructed'
+      console.log 'should have same keys'
 
       key = "1j9gnir6"
       secret = "s4fj0FqVHfQX2qC2"

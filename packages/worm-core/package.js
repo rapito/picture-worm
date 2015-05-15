@@ -12,6 +12,7 @@ Npm.depends({
 Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use('coffeescript');
+    api.use('underscore');
     api.addFiles('ContextIOClient.coffee', 'server');
 });
 
@@ -20,5 +21,6 @@ Package.onTest(function (api) {
     api.use('practicalmeteor:munit');
     api.use('coffeescript');
 
+    api.addFiles('tests/Tests.coffee', 'server');
     api.addFiles('tests/ContextIOClientTests.coffee', 'server');
 });

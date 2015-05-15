@@ -6,23 +6,25 @@ class @ContextIOClient
   key: null
   secret: null
 
-  Constructor: (key, secret)->
+  constructor: (key, secret)->
     @key = key
     @secret = secret
 
     @client = new ContextIO.Client
       key: key
       secret: secret
-    @instance = @
+
+    ContextIOClient.instance = @
 
   @get: (key, secret)->
-    if @instance?
-      return @instance
+    if ContextIOClient.instance?
+      return ContextIOClient.instance
 
     key ?= Meteor.settings.services.contextio.key
     secret ?= Meteor.settings.services.contextio.secret
-    @instance ?= new ContextIOClient(key, secret)
-    @instance
+
+    ContextIOClient.instance ?= new ContextIOClient(key, secret)
+    ContextIOClient.instance
 
 
 @CioC = ContextIOClient.get()
