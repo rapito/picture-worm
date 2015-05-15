@@ -3,3 +3,6 @@
 *.sublime-workspace
 dump
 settings.json
+
+.idea/
+*.iml
