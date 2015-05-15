@@ -4,5 +4,8 @@
 dump
 settings.json
 
+# ignore npm packages, let meteor add them
+packages/npm-container/
+
 .idea/
 *.iml
