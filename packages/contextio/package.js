@@ -1,7 +1,7 @@
 Package.describe({
     summary: "picture-worm backend package",
     version: "0.0.0",
-    name: "rapito:worm-core",
+    name: "rapito:contextio",
     git: "https://github.com/rapito/picture-worm.git"
 });
 
@@ -13,14 +13,15 @@ Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.use('coffeescript');
     api.use('underscore');
-    api.addFiles('ContextIOClient.coffee', 'server');
+    api.export('Cio', ['server','client']);
+    api.addFiles('ContextIOClient.coffee');
 });
 
 Package.onTest(function (api) {
-    api.use('rapito:worm-core', 'server');
+    api.use('rapito:contextio');
     api.use('practicalmeteor:munit');
     api.use('coffeescript');
 
-    api.addFiles('tests/Tests.coffee', 'server');
-    api.addFiles('tests/ContextIOClientTests.coffee', 'server');
+    api.addFiles('tests/Tests.coffee');
+    api.addFiles('tests/ContextIOClientTests.coffee');
 });

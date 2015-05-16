@@ -27,5 +27,4 @@ class @ContextIOClient
     ContextIOClient.instance
 
 
-@CioC = ContextIOClient.get()
-@Cio = @CioC.client
+Cio = ContextIOClient.get()

@@ -5,8 +5,7 @@ class ContextIOClientTests
 
   describe 'ContextIOClient', ->
     beforeAll (test) ->
-      @wrapper = CioC
-      @client = Cio
+      @wrapper = Cio
 
     beforeEach (test) ->
     afterEach (test) ->

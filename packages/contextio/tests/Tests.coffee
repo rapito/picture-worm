@@ -1,6 +1,5 @@
 class Tests
 
-
   describe 'Tests', ->
 
     it 'should read settings', (test) ->
