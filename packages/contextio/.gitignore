@@ -3,7 +3,6 @@
 *.sublime-workspace
 dump
 settings.json
-settings.dev.json
 settings.prod.json
 
 node_modules/
@@ -11,6 +10,7 @@ node_modules/
 # ignore npm packages, let meteor add them
 packages/npm-container/
 packages/**/.npm/
+.npm/
 
 .idea/
 *.iml
