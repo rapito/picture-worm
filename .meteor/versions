@@ -63,7 +63,7 @@ observe-sequence@1.0.6
 ordered-dict@1.0.3
 practicalmeteor:chai@1.9.2_3
 random@1.0.3
-rapito:contextio@0.0.0
+rapito:contextio@0.1.0
 reactive-dict@1.1.0
 reactive-var@1.0.5
 reload@1.1.3

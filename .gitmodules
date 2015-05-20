@@ -1,4 +1,0 @@
-[submodule "packages/meteor-contextio"]
-	path = packages/meteor-contextio
-	url = https://github.com/rapito/meteor-contextio
-	branch = master
