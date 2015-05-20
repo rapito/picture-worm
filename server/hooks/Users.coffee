@@ -1,7 +1,13 @@
 Accounts.onCreateUser (opts, user)->
   console.log opts
   console.log user
-  mail = user.emails[0]
+  mail = user.emails[0].address
   #attach account to user
-  Cio.createAccountSimple(mail,mail,mail)
+  id = Cio.createAccountSimple(mail, mail, mail)
+  if id?
+    user.services.contextio =
+      accountId: id
+      sources: []
+  else
+    return false
   user
