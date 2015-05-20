@@ -19,5 +19,5 @@ Entry App for [Context.io App Challenge](http://contextio.challengepost.com/)
 
 - [Differential BoilerPlate](https://github.com/Differential/meteor-boilerplate/tree/materialize)
 - [Materialize](http://materializecss.com/getting-started.html)
-- [Context.io](https://context.io/)
+- [Context.io](https://github.com/rapito/meteor-contextio)
 - [Munit](https://github.com/practicalmeteor/munit)
