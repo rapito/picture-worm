@@ -1,5 +1,11 @@
 Template.callbackProcess.rendered = ->
-  console.log 'callbackProcess.rendered', this.data
+  token = this.data?.token
+  parentWindow = window.opener
 
-  window.opener.Meteor.call 'connectTokens', this.data.token
-  window.close()
+  if token? and parentWindow?
+    console.log 'received token: ', token
+    id = parentWindow.Meteor.userId()
+    console.log 'userId', id
+    console.log 'userId2', parentWindow.Session.get('accountId')
+    parentWindow.Meteor.call 'Users.connectTokens', id, token
+#    window.close()
