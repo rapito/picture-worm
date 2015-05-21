@@ -24,6 +24,15 @@ Meteor.methods
     result = Cio.callAsyncOrSync(Cio.client.accounts(accountId).sources().get)
     result = result?.body
 
-  'Users.filterMailboxes': (accountId,doc)->
+  'Users.filterMailboxes': (accountId, doc)->
     result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files().get, doc
+    result
+
+  'Users.getFileLink': (accountId, fileId)->
+    params = {as_link: 1} # get link
+    result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files(fileId).content().get, params
+    result =
+      fileId: fileId
+      url: result?.body
+
     result
