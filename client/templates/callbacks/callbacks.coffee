@@ -4,8 +4,13 @@ Template.callbackProcess.rendered = ->
 
   if token? and parentWindow?
     console.log 'received token: ', token
-    id = parentWindow.Meteor.userId()
-    console.log 'userId', id
-    console.log 'userId2', parentWindow.Session.get('accountId')
-    parentWindow.Meteor.call 'Users.connectTokens', id, token
-#    window.close()
+    userId = parentWindow.Meteor.userId()
+    accountId = parentWindow.Session.get('accountId')
+
+    parentWindow.Meteor.call 'Users.connectTokens', userId, accountId, token, (e, result)->
+      if not e? # update previous windows mailboxes if successful
+        parentWindow.Meteor.call 'Users.getMailboxes', accountId, (e, r)->
+          if not e?
+            parentWindow.Session.set 'mailboxes', r
+
+    window.close()

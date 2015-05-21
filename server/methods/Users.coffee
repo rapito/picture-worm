@@ -5,17 +5,20 @@ Meteor.methods
   'Users.getAccountId': (userId) ->
     getAccountId userId
 
-  'Users.connectTokens': (userId, token)->
-    console.log arguments
-    accountId = getAccountId userId
-    source = Cio.connectTokensSimple accountId, token
-    source = source?.label
+  'Users.connectTokens': (userId, accountId, token)->
+    if not accountId or not token
+      console.error 'no accountId nor token? wth dude?'
+      return
 
-    console.log 'received source!', source
+    source = Cio.connectTokensSimple accountId, token
+
     user = Meteor.user()
-    user.services?.contextio?.sources?.push source
+    user.services?.contextio?.sources?.push
+      email: source?.email
+      label: source?.serverLabel
 
     Meteor.users.update({_id: userId}, user)
+    source
 
 
   'Users.getMailboxes': (accountId)->
