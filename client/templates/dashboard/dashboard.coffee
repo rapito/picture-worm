@@ -13,6 +13,19 @@ Template.dashboard.rendered = ->
       else
         Session.set 'mailboxes', r
 
+Template.dashboard.events =
+  'click input[data-mailbox-label]': (evt)->
+#    console.log this, evt
+    filtered = Session.get 'filteredMailboxes'
+    filtered ?= {}
+
+    if filtered?[this.label]?
+      filtered[this.label] = null
+    else
+      filtered[this.label] = true
+
+#    console.log filtered
+    Session.set 'filteredMailboxes', filtered
 
 Template.dashboard.helpers
   accountId: ->

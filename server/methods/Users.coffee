@@ -20,7 +20,10 @@ Meteor.methods
     Meteor.users.update({_id: userId}, user)
     source
 
-
   'Users.getMailboxes': (accountId)->
     result = Cio.callAsyncOrSync(Cio.client.accounts(accountId).sources().get)
     result = result?.body
+
+  'Users.filterMailboxes': (accountId,doc)->
+    result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files().get, doc
+    result

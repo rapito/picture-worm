@@ -3,7 +3,6 @@ Template.callbackProcess.rendered = ->
   parentWindow = window.opener
 
   if token? and parentWindow?
-    console.log 'received token: ', token
     userId = parentWindow.Meteor.userId()
     accountId = parentWindow.Session.get('accountId')
 

@@ -4,14 +4,26 @@
 
         <h1>Dashboard</h1>
 
-        <ul class="collection">
-            {{#each mailboxes}}
-                <li class="collection-item">
-                    <input type="checkbox" id="{{label}}"/>
-                    <label for="{{label}}">{{username}}</label>
-                </li>
-            {{/each}}
-        </ul>
+
+        <div class="row">
+
+            <div class="col s12 m4">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h5>Mailboxes</h5></li>
+                    {{#each mailboxes}}
+                        <li class="collection-item">
+                            <input data-mailbox-label="mailbox-{{label}}" type="checkbox" id="{{label}}"/>
+                            <label for="{{label}}">{{username}}</label>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            <div class="card blue col s12 m8 white-text">
+                {{> filterMailboxesForm}}
+            </div>
+        </div>
 
     </div>
 </template>
+
