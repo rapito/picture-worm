@@ -22,8 +22,13 @@
             <div class="card blue col s12 m8 white-text">
                 {{> filterMailboxesForm}}
             </div>
+
+            <div class="s12 m8">
+                {{#each mailboxFiles}}
+                    {{> imgCard}}
+                {{/each}}
+            </div>
         </div>
 
     </div>
 </template>
-

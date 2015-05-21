@@ -24,7 +24,7 @@ Template.dashboard.events =
     else
       filtered[this.label] = true
 
-#    console.log filtered
+    #    console.log filtered
     Session.set 'filteredMailboxes', filtered
 
 Template.dashboard.helpers
@@ -43,3 +43,6 @@ Template.dashboard.helpers
 
   mailboxes: ->
     Session.get 'mailboxes'
+
+  mailboxFiles: ->
+    Session.get 'files'
