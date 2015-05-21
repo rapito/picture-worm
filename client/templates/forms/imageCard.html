@@ -1,13 +1,20 @@
 <template name="imgCard">
     <div class="col s12 m4">
-        <div class="card">
+        <div class="card" id="img-card-{{file_id}}">
             <div class="card-image">
                 <img data-img-id="{{file_id}}">
-                <span class="card-title">{{file_name}}</span>
+                <span class="card-title truncate">{{file_name}}</span>
             </div>
+            {{> spinner}}
             <div class="card-content">
                 <b>{{subject}}</b>
             </div>
         </div>
+    </div>
+</template>
+
+<template name="spinner">
+    <div id="spinner-{{file_id}}" class="progress">
+        <div class="indeterminate"></div>
     </div>
 </template>

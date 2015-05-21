@@ -20,7 +20,6 @@ AutoForm.hooks
       for label,v of mailboxes
         if mailboxes[label]?
           Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
-            console.log e, r
             pushFiles r?.body
             form.done()
 
