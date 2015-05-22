@@ -29,7 +29,12 @@ Meteor.methods
     result
 
   'Users.getFileLink': (accountId, fileId)->
-    params = {as_link: 1} # get link
+    params =
+      as_link: 1 # get link
+      limit: 10
+      file_size_min: 102400 # 100kb
+      file_size_max: 819200 # 800kb
+
     result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files(fileId).content().get, params
     result =
       fileId: fileId

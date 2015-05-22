@@ -3,5 +3,14 @@
     type: String
     max: 200
     optional: true
+  date_before:
+    type: Date
+    optional: true
     autoform:
-      class: 'white-text'
+      type: 'pickadate'
+  date_after:
+    type: Date
+    optional: true
+    autoform:
+      type: 'pickadate'
+
