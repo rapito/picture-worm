@@ -8,9 +8,11 @@
     optional: true
     autoform:
       type: 'pickadate'
+      pickadateOptions: 'pickadateOptions'
   date_after:
     type: Date
     optional: true
     autoform:
       type: 'pickadate'
+      pickadateOptions: 'pickadateOptions'
 
