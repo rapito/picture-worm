@@ -1,6 +1,7 @@
 Template.dashboard.rendered = ->
   userId = Meteor.userId()
   Meteor.call 'Users.getAccountId', userId, (e, r)->
+    e = parseCioError e,r
     if e?
       alert e
     else
@@ -8,6 +9,7 @@ Template.dashboard.rendered = ->
       Session.set 'accountId', accountId
 
     Meteor.call 'Users.getMailboxes', accountId, (e, r)->
+      e = parseCioError e,r
       if e?
         alert e
       else
@@ -42,7 +44,11 @@ Template.dashboard.helpers
     UI._globalHelpers.urlFor options
 
   mailboxes: ->
-    Session.get 'mailboxes'
+    result = Session.get 'mailboxes'
+    console.log result
+    result
 
   mailboxFiles: ->
-    Session.get 'files'
+    result = Session.get 'files'
+    console.log result
+    result
