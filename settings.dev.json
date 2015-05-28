@@ -9,7 +9,7 @@
     "contextio": {
       "key": "1j9gnir6",
       "secret": "s4fj0FqVHfQX2qC2",
-      "callbackUrl": "http://127.0.0.1:3000/api/cb/contextio/connect_tokens/"
+      "callbackUrl": "http://localhost:3000/api/cb/contextio/connect_tokens/"
     }
   }
 }

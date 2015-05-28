@@ -1,14 +1,19 @@
 Template.filterMailboxesForm.rendered = ->
 
-
 Template.filterMailboxesForm.helpers
   mailboxesFilterSchema: ->
     MailboxesFilterSchema
 
+  pickadateOptions: ->
+    options =
+      selectMonths: true
+      selectYears: 15
+    options
+
 AutoForm.hooks
   filterMailboxesForm:
     onSubmit: (doc)->
-      event.preventDefault();
+#      event.preventDefault();
       clearFiles()
       id = Session.get 'accountId'
 
@@ -17,8 +22,8 @@ AutoForm.hooks
       doc?.date_before = doc?.date_before?.getTime() / 1000 | 0
       doc?.date_after = doc?.date_after?.getTime() / 1000 | 0
 
-#      doc =
-#        file_name: doc?.file_name
+      #      doc =
+      #        file_name: doc?.file_name
 
       mailboxes = Session.get 'filteredMailboxes'
       form = this
@@ -26,9 +31,12 @@ AutoForm.hooks
       for label,v of mailboxes
         if mailboxes[label]?
           Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
-            console.log e, r
-            pushFiles r?.body
-            form.done()
+            e = parseCioError e, r
+            if not e?
+              pushFiles r?.body
+              form.done()
+            else
+              console.log e
 
       false
 
