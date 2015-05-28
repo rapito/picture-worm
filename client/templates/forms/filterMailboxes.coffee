@@ -13,7 +13,7 @@ Template.filterMailboxesForm.helpers
 AutoForm.hooks
   filterMailboxesForm:
     onSubmit: (doc)->
-      event.preventDefault();
+#      event.preventDefault();
       clearFiles()
       id = Session.get 'accountId'
 

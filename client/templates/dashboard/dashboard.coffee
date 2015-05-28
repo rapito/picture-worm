@@ -45,10 +45,10 @@ Template.dashboard.helpers
 
   mailboxes: ->
     result = Session.get 'mailboxes'
-    console.log result
+#    console.log result
     result
 
   mailboxFiles: ->
     result = Session.get 'files'
-    console.log result
+#    console.log result
     result

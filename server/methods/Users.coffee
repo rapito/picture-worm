@@ -35,18 +35,16 @@ Meteor.methods
     result = cioError 'no accountId or doc passed'
     if accountId?
       doc ?= {}
-      doc.limit = 10
+      doc.limit = 9
       doc.file_size_min = 102400 # 100kb
       doc.file_size_max = 819200 # 800kb
 
-      console.log doc
-      if doc.date_before? == 0
+      if doc.date_before == 0
         delete doc.date_before
 
-      if doc.date_after? == 0
+      if doc.date_after == 0
         delete doc.date_after
 
-      console.log doc
       result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files().get, doc
     result
 
