@@ -5,10 +5,10 @@ Template.filterMailboxesForm.helpers
     MailboxesFilterSchema
 
   pickadateOptions: ->
-    {
+    options =
       selectMonths: true
       selectYears: 15
-    }
+    options
 
 AutoForm.hooks
   filterMailboxesForm:
