@@ -1,10 +1,9 @@
 Template.imgCard.rendered = ->
-  imgs = $('img[data-img-id]')
   accountId = Session.get 'accountId'
   fileId = this.data?.file_id
   caption = "#{this.data?.file_name} - #{this.data?.subject}"
 
-  cb = (e, r)->
+  Meteor.call 'Users.getFileLink', accountId, fileId, (e, r)->
     error = e? or r?.url?.type == 'error'
     imgId = r?.fileId
 
@@ -17,24 +16,27 @@ Template.imgCard.rendered = ->
     else
       imgUri = r.url
 
+    # let client load the img
     el = "img[data-img-id='#{imgId}']"
     $(el)[0]?.src = imgUri
     $(el).parent().next().hide() # hide spinner
 
     # create materialboxed image to trigger on this img click
-    boxed = document.createElement 'img'
-    boxed.src = imgUri
-    $(boxed).attr 'class', 'materialboxed hidden-card-image'
-    $(boxed).attr 'id', "img-materialboxed-#{fileId}"
-    $(boxed).attr 'data-caption', caption
-
-    $('#materialboxed-container').append(boxed)
-    $('.materialboxed').materialbox()
-
-  Meteor.call 'Users.getFileLink', accountId, fileId, cb
+    appendMaterializedBoxedImg fileId, imgUri, caption
 
 Template.imgCard.events =
   'click .card-image': (evt)->
-    console.log "img-materialboxed-#{this.file_id}"
     $("#img-materialboxed-#{this.file_id}").click();
 
+
+# creates materialboxed image hides it, adds it to a container to be
+# later shown on the card that contains the same fileId
+appendMaterializedBoxedImg = (fileId, imgUri, caption) ->
+  boxed = document.createElement 'img'
+  boxed.src = imgUri
+  $(boxed).attr 'class', 'materialboxed hidden-card-image'
+  $(boxed).attr 'id', "img-materialboxed-#{fileId}"
+  $(boxed).attr 'data-caption', caption
+
+  $('#materialboxed-container').append(boxed)
+  $('.materialboxed').materialbox()
