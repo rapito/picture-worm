@@ -49,7 +49,6 @@ Meteor.methods
     result
 
   'Users.getFileLink': (accountId, fileId)->
-    console.log 'Users.getFileLink', arguments
     result = cioError 'no accountId or fileId passed'
 
     if accountId? and fileId?
