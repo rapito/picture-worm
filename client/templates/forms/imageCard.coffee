@@ -23,6 +23,6 @@ Template.imgCard.rendered = ->
     # make it previewable
     $('.materialboxed').materialbox()
 
-    Meteor.call 'Users.getFileLink', accountId, fileId, cb
+  Meteor.call 'Users.getFileLink', accountId, fileId, cb
 
 
