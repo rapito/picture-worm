@@ -17,6 +17,9 @@ AutoForm.hooks
       clearFiles()
       id = Session.get 'accountId'
 
+      # disable button
+      toggleDisabledElement '#filterMailboxesForm .btn', false
+
       # we are looking only for images
       doc?.file_name = "/\.jpe?g$/"
       doc?.date_before = doc?.date_before?.getTime() / 1000 | 0
@@ -37,6 +40,9 @@ AutoForm.hooks
               form.done()
             else
               console.log e
+
+            # re enable button
+            toggleDisabledElement '#filterMailboxesForm .btn', true
 
       false
 

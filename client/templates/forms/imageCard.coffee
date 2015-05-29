@@ -5,8 +5,6 @@ Template.imgCard.rendered = ->
   caption = "#{this.data?.file_name} - #{this.data?.subject}"
 
   cb = (e, r)->
-    console.log 'received', arguments
-
     error = e? or r?.url?.type == 'error'
     imgId = r?.fileId
 
