@@ -7,7 +7,7 @@ Template.filterMailboxesForm.helpers
   pickadateOptions: ->
     options =
       selectMonths: true
-      selectYears: 15
+      selectYears: 25
     options
 
 AutoForm.hooks

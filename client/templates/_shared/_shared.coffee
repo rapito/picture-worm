@@ -47,8 +47,6 @@
 # fix query filters and add default values
 @sanitizeDoc = (doc)->
   doc ?= {}
-  # we are looking only for images
-  doc?.file_name = "/\.jpe?g$/"
 
   if _.isObject(doc?.date_after) or _.isObject(doc?.date_before)
     doc?.date_before = doc?.date_before?.getTime() / 1000 | 0
