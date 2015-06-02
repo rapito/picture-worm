@@ -24,4 +24,34 @@
   else
     $(element).addClass 'disabled'
 
+# toggles the visibility of an element
+@toggleElementVisibility = (element, show)->
+  if !show or $(element).css('display') != 'none'
+    $(element).hide()
+  else
+    $(element).show()
 
+# Add more files to the session
+@pushFiles = (loadout)->
+  files = Session.get 'files'
+  files ?= []
+
+  for f in loadout
+    files.push f
+
+  Session.set 'files', files
+
+@clearFiles = ->
+  Session.set 'files', []
+
+# fix query filters and add default values
+@sanitizeDoc = (doc)->
+  doc ?= {}
+  # we are looking only for images
+  doc?.file_name = "/\.jpe?g$/"
+
+  if _.isObject(doc?.date_after) or _.isObject(doc?.date_before)
+    doc?.date_before = doc?.date_before?.getTime() / 1000 | 0
+    doc?.date_after = doc?.date_after?.getTime() / 1000 | 0
+
+  doc
