@@ -1,17 +1,22 @@
 <template name="filterMailboxesForm">
-    <!-- Teal page content  -->
-    <h5>Filters</h5>
-
     {{#autoForm schema=mailboxesFilterSchema id="filterMailboxesForm"}}
-        <div class="row">
-            <!--{{> afFieldInput name="email" }}-->
-
-            <div class="input-field col s3">
-                <i class="mdi-communication-email prefix"></i>
-                <input id="icon_prefix" name='email' data-schema-key="email" type="text" class="white-text">
-                <label class="white-text" for="icon_prefix">email</label>
+        <div class="card blue col s12 m8 white-text">
+            <h5>Filters</h5>
+        </div>
+        <div class="card col s12 m8">
+            <div class="row">
+                <div class="input-field col s4">
+                    {{> afQuickField name='email' }}
+                </div>
+                <div class="input-field col s4">
+                    {{> afQuickField name='date_after' pickadateOptions=pickadateOptions }}
+                </div>
+                <div class="input-field col s4">
+                    {{> afQuickField name='date_before' pickadateOptions=pickadateOptions }}
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">filter</button>
+            <button type="submit" class="waves-effect waves-light btn right">filter</button>
         </div>
     {{/autoForm}}
+
 </template>

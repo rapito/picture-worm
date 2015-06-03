@@ -1,38 +1,45 @@
 Template.filterMailboxesForm.rendered = ->
 
-
 Template.filterMailboxesForm.helpers
   mailboxesFilterSchema: ->
     MailboxesFilterSchema
 
+  pickadateOptions: ->
+    options =
+      selectMonths: true
+      selectYears: 25
+    options
+
 AutoForm.hooks
   filterMailboxesForm:
     onSubmit: (doc)->
-      clearFiles()
-      id = Session.get 'accountId'
+      try
+        clearFiles()
+        id = Session.get 'accountId'
 
-      # we are looking only for images
-      doc?.file_name = "/\.jpe?g$/"
+        toggleDisabledElement '#filterMailboxesForm .btn', false # disable button
+        toggleElementVisibility('#btn-load-more', false) # hide load more button
+        doc = sanitizeDoc doc
 
-      mailboxes = Session.get 'filteredMailboxes'
-      form = this
+        mailboxes = Session.get 'filteredMailboxes'
+        form = this
 
-      for label,v of mailboxes
-        if mailboxes[label]?
-          Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
-            pushFiles r?.body
-            form.done()
+        for label,v of mailboxes
+          if mailboxes[label]?
+            doc.source = label
+            Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
+              e = parseCioError e, r
+              console.log e, r
+              if not e?
+                pushFiles r?.body
+                form.done()
+                toggleElementVisibility '#btn-load-more', true
+                Session.set 'currentDoc', doc  # save current query
+              else
+                console.log e
+
+              toggleDisabledElement '#filterMailboxesForm .btn', true # re enable button
+      catch e
+        console.error e
 
       false
-
-pushFiles = (loadout)->
-  files = Session.get 'files'
-  files ?= []
-
-  for f in loadout
-    files.push f
-
-  Session.set 'files', files
-
-clearFiles = ->
-  Session.set 'files', []
