@@ -48,7 +48,7 @@ Meteor.methods
       if doc.date_after == 0
         delete doc.date_after
 
-#      doc.sort_order = 'asc'
+      doc.sort_order = 'asc'
 
       result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files().get, doc
     result
