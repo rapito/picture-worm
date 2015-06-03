@@ -7,53 +7,38 @@ Template.filterMailboxesForm.helpers
   pickadateOptions: ->
     options =
       selectMonths: true
-      selectYears: 15
+      selectYears: 25
     options
 
 AutoForm.hooks
   filterMailboxesForm:
     onSubmit: (doc)->
-#      event.preventDefault();
-      clearFiles()
-      id = Session.get 'accountId'
+      try
+        clearFiles()
+        id = Session.get 'accountId'
 
-      # disable button
-      toggleDisabledElement '#filterMailboxesForm .btn', false
+        toggleDisabledElement '#filterMailboxesForm .btn', false # disable button
+        toggleElementVisibility('#btn-load-more',false) # hide load more button
+        doc = sanitizeDoc doc
 
-      # we are looking only for images
-      doc?.file_name = "/\.jpe?g$/"
-      doc?.date_before = doc?.date_before?.getTime() / 1000 | 0
-      doc?.date_after = doc?.date_after?.getTime() / 1000 | 0
+        mailboxes = Session.get 'filteredMailboxes'
+        form = this
 
-      #      doc =
-      #        file_name: doc?.file_name
+        for label,v of mailboxes
+          if mailboxes[label]?
+            Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
+              e = parseCioError e, r
+              console.log e, r
+              if not e?
+                pushFiles r?.body
+                form.done()
+                toggleElementVisibility('#btn-load-more',true)
+                Session.set 'currentDoc', doc  # save current query
+              else
+                console.log e
 
-      mailboxes = Session.get 'filteredMailboxes'
-      form = this
-
-      for label,v of mailboxes
-        if mailboxes[label]?
-          Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
-            e = parseCioError e, r
-            if not e?
-              pushFiles r?.body
-              form.done()
-            else
-              console.log e
-
-            # re enable button
-            toggleDisabledElement '#filterMailboxesForm .btn', true
+              toggleDisabledElement '#filterMailboxesForm .btn', true # re enable button
+      catch e
+        console.error e
 
       false
-
-pushFiles = (loadout)->
-  files = Session.get 'files'
-  files ?= []
-
-  for f in loadout
-    files.push f
-
-  Session.set 'files', files
-
-clearFiles = ->
-  Session.set 'files', []

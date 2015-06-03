@@ -35,7 +35,10 @@ Meteor.methods
     result = cioError 'no accountId or doc passed'
     if accountId?
       doc ?= {}
-      doc.limit = 9
+
+      # we are looking only for images
+      doc?.file_name = "/\.(?i)(jpg|jpeg|png|gif|bmp)$/"
+      doc.limit = Settings.pageSize
       doc.file_size_min = 102400 # 100kb
       doc.file_size_max = 819200 # 800kb
 
@@ -44,6 +47,8 @@ Meteor.methods
 
       if doc.date_after == 0
         delete doc.date_after
+
+      doc.sort_order = 'asc'
 
       result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files().get, doc
     result

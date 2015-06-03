@@ -21,14 +21,19 @@
 
             {{> filterMailboxesForm}}
 
-            <div class="s12">
-                {{#each mailboxFiles}}
-                    {{> imgCard}}
-                {{/each}}
-            </div>
         </div>
 
-        <div id="materialboxed-container">
+        <div class="row">
+            {{#each mailboxFiles}}
+                {{> imgCard}}
+            {{/each}}
+        </div>
+
+        <div class="row center-align">
+            <button id="btn-load-more" class="btn btn-success waves-effect waves-light hidden">Load more</button>
+        </div>
+
+        <div id="materialboxed-container" class="row">
 
         </div>
 
