@@ -26,10 +26,10 @@
 
 # toggles the visibility of an element
 @toggleElementVisibility = (element, show)->
-  if !show or $(element).css('display') != 'none'
-    $(element).hide()
-  else
+  if show
     $(element).show()
+  else if !show or $(element).css('display') != 'none'
+    $(element).hide()
 
 # Add more files to the session
 @pushFiles = (loadout)->
@@ -55,4 +55,4 @@
   doc
 
 @toast = (message)->
-  Materialize.toast(message,Settings.toastTimeout)
+  Materialize.toast(message, Settings.toastTimeout)
