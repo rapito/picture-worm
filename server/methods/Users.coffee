@@ -37,8 +37,8 @@ Meteor.methods
       doc ?= {}
 
       # we are looking only for images
-      doc?.file_name = "/\.(jpg|jpeg|png|gif|bmp)$/"
-      doc.limit = 9
+      doc?.file_name = "/\.(?i)(jpg|jpeg|png|gif|bmp)$/"
+      doc.limit = Settings.pageSize
       doc.file_size_min = 102400 # 100kb
       doc.file_size_max = 819200 # 800kb
 

@@ -36,7 +36,7 @@ Template.dashboard.events =
 
       doc = Session.get 'currentDoc' # get currentQuery
       doc = sanitizeDoc(doc)
-      doc.offset = if doc.offset? then doc.offset + 9 else 9 # offset to 9 more
+      doc.offset = if doc.offset? then doc.offset + Settings.pageSize else Settings.pageSize # offset to 9 more
 
       Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
         e = parseCioError e, r
