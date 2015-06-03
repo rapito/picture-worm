@@ -53,3 +53,6 @@
     doc?.date_after = doc?.date_after?.getTime() / 1000 | 0
 
   doc
+
+@toast = (message)->
+  Materialize.toast(message,Settings.toastTimeout)

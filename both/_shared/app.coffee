@@ -9,3 +9,4 @@
 
 @Settings =
   pageSize: 9
+  toastTimeout: 4000

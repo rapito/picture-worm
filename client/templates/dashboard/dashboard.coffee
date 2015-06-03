@@ -32,7 +32,7 @@ Template.dashboard.events =
   'click #btn-load-more': (evt)->
     try
       id = Session.get 'accountId'
-      toggleDisabledElement '#btn-load-more', false       # disable load more
+      toggleDisabledElement '#btn-load-more', false # disable load more
 
       doc = Session.get 'currentDoc' # get currentQuery
       doc = sanitizeDoc(doc)
@@ -43,8 +43,15 @@ Template.dashboard.events =
         console.log e, r
         if not e?
           pushFiles r?.body
-          toggleDisabledElement '#btn-load-more', true # re-enable button
           Session.set 'currentDoc', doc
+
+          # hide load more button if no more files
+          if _.isEmpty r?.body
+            toggleElementVisibility '#btn-load-more', false # re-enable button
+            toast 'No more images!'
+          else  # just enable it
+            toggleDisabledElement '#btn-load-more', true # re-enable button
+
         else
           console.log e
     catch e
