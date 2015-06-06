@@ -1,5 +1,5 @@
 AutoForm.hooks 'items-new-form':
   onSuccess: (operation, result, template) ->
-    toast 'Item created successfully!', 4000
+    _toast 'Item created successfully!'
     Router.go 'dashboard'
     return
