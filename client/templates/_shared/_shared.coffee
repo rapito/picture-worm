@@ -10,6 +10,9 @@
 
   result
 
+@safeArray = (obj) ->
+  result = if _.isArray(obj) then obj else []
+  result
 
 @toggleDisabledElement = (element, enable)->
   if _.isString element
