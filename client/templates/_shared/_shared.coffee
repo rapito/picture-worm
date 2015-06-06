@@ -57,5 +57,18 @@
 
   doc
 
-@toast = (message)->
-  Materialize.toast(message, Settings.toastTimeout)
+@_toast = (message)->
+  toast(message, Settings.toastTimeout)
+
+@deleteMailboxFromArray = (str)->
+  mbs = Session.get 'mailboxes'
+  result = []
+
+  for s in mbs
+    if s.label != str
+      result.push s
+
+  Session.set 'mailboxes', result
+  mbs
+
+
