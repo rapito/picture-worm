@@ -59,7 +59,7 @@ Template.dashboard.events =
 
 Template.dashboard.helpers
   accountId: ->
-    Session.get 'accountId'
+    result = Session.get 'accountId'
 
   classesMailboxAdd: ->
     'btn-floating btn-large waves-effect waves-light right mdi-content-add'
@@ -73,10 +73,13 @@ Template.dashboard.helpers
 
   mailboxes: ->
     result = Session.get 'mailboxes'
+    result = safeArray result
     #    console.log result
     result
 
   mailboxFiles: ->
     result = Session.get 'files'
+    result = safeArray result
     #    console.log result
     result
+
