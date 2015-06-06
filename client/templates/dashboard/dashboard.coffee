@@ -66,7 +66,6 @@ Template.deleteMailboxConfirmModal.events =
           deleteMailboxFromArray label
           _toast "Mailbox #{username} deleted!"
 
-
 Template.dashboard.helpers
   accountId: ->
     result = Session.get 'accountId'
@@ -98,6 +97,13 @@ Template.dashboard.helpers
 
   emailToShow: ->
     Session.get 'emailToShow'
+
+Template.emailModal.helpers
+  date_received: ->
+    moment(this.date_received).format("LLLL")
+
+  content: ->
+    Session.get 'emailToShow.content'
 
 # Looks for mailboxes on the current accountId
 # and stores them in Session.
