@@ -28,6 +28,11 @@ Template.imgCard.events =
   'click .card-image': (evt)->
     $("#img-materialboxed-#{this.file_id}").click();
 
+  'click .mail-trigger': (evt)->
+    Session.set 'emailToShow', this
+    $('.mail-trigger').leanModal();
+    $('#modal-email').openModal();
+
 
 # creates materialboxed image hides it, adds it to a container to be
 # later shown on the card that contains the same fileId

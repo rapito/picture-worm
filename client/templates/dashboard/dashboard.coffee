@@ -96,6 +96,8 @@ Template.dashboard.helpers
   mailboxToDelete: ->
     Session.get 'mailboxToDelete'
 
+  emailToShow: ->
+    Session.get 'emailToShow'
 
 # Looks for mailboxes on the current accountId
 # and stores them in Session.
