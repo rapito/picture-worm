@@ -4,7 +4,6 @@
 
         <h1>Dashboard</h1>
 
-
         <div class="row">
 
             <div class="col s12 m4">
@@ -13,7 +12,8 @@
                     {{#each mailboxes}}
                         <li class="collection-item">
                             <input data-mailbox-label="mailbox-{{label}}" type="checkbox" id="{{label}}"/>
-                            <label for="{{label}}">{{username}}</label>
+                            <label class="truncate" for="{{label}}">{{username}}</label>
+                            <a href="#modal-del-mb" class="secondary-content"><i class="mdi-action-delete"></i></a>
                         </li>
                     {{/each}}
                 </ul>
@@ -37,5 +37,19 @@
 
         </div>
 
+        {{> deleteMailboxConfirmModal}}
+
+    </div>
+</template>
+
+<template name="deleteMailboxConfirmModal">
+    <div id="modal-del-mb" class="modal">
+        <div class="modal-content">
+            <h4>Delete Mailbox</h4>
+            <p>Are you sure you want to remove this mailbox: {{mailboxToDelete}}</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Delete</a>
+        </div>
     </div>
 </template>
