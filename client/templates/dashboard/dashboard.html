@@ -73,7 +73,7 @@
                     <span class="s3 label-mail teal-text text-darken-2">To: </span>
                     <span class="s9">
                         {{#each addresses.to}}
-                            {{email}},
+                            {{email}}
                         {{/each}}
                     </span>
                 </div>
@@ -85,16 +85,16 @@
                     <span class="s3 label-mail teal-text text-darken-2">Date: </span>
                     <span class="s9">{{date_received}}</span>
                 </div>
-                <div class="s12">
-                    {{#each mailImages}}
-                        {{> mailImage}}
-                    {{/each}}
-                </div>
                 <div class="separator"></div>
             </div>
 
             <div class="s12">
                 {{#if content}}
+                    <div class="s12 container-mail-images">
+                        {{#each mailImages}}
+                            {{> mailImage}}
+                        {{/each}}
+                    </div>
                     {{{content}}}
                 {{else}}
                     <div class="valign-wrapper center-align">
@@ -107,9 +107,14 @@
             </div>
         </div>
         <div class="modal-footer">
+            <a data-trigger="load-images" href="#!" class="modal-action waves-effect waves-green btn-flat ">Load Images</a>
             <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-flat ">Close</a>
         </div>
     </div>
+</template>
+
+<template name="mailImage">
+    <img src="images/placeholder.png" />
 </template>
 
 <template name="waitingSpinner">

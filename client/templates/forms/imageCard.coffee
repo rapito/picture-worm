@@ -30,6 +30,7 @@ Template.imgCard.events =
 
   'click .mail-trigger': (evt)->
     Session.set 'emailToShow', this
+    Session.set 'emailToShow.images', []
     delete Session.keys['emailToShow.mail']
     delete Session.keys['emailToShow.content']
 
@@ -45,6 +46,17 @@ Template.imgCard.events =
         Session.set 'emailToShow.mail', r
         content = getPreferredContent r
         Session.set 'emailToShow.content', content
+        images = getImages r
+        Session.set 'emailToShow.images', images
+
+
+# extracts all images from the
+getImages = (mail)->
+  result = []
+  for f in mail?.files
+    if f.type.indexOf('image/') > -1
+      result.push f
+  result
 
 # extracts mail body from mail object, looks for any text/html first
 getPreferredContent = (mail)->

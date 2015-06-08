@@ -105,6 +105,9 @@ Template.emailModal.helpers
   content: ->
     Session.get 'emailToShow.content'
 
+  mailImages: ->
+    Session.get 'emailToShow.images'
+
 # Looks for mailboxes on the current accountId
 # and stores them in Session.
 fetchAccountInfo = (userId) ->
