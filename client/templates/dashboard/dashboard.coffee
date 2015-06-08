@@ -98,6 +98,26 @@ Template.dashboard.helpers
   emailToShow: ->
     Session.get 'emailToShow'
 
+Template.emailModal.events =
+  'click a[data-trigger=load-images]': (evt)->
+    console.log this, evt
+    images = Session.get 'emailToShow.images'
+    id = Session.get 'accountId'
+
+    for img in images
+      console.log img
+      Meteor.call 'Users.getFileLink', id, img.file_id, (e,r) ->
+        error = e? or r?.url?.type == 'error'
+        imgId = r?.fileId
+        if error
+          console.error e, r
+          imgUri = 'http://data2.whicdn.com/images/45431798/thumb.png'
+        else
+          imgUri = r.url
+
+        $("#mail-img-#{imgId}")[0]?.src = imgUri
+
+
 Template.emailModal.helpers
   date_received: ->
     moment(this.date_received).format("LLLL")
