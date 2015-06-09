@@ -154,8 +154,13 @@ fetchAccountInfo = (userId) ->
         alert e
       else
         Session.set 'mailboxes', r
+
         if _.isEmpty r
           _toast 'Click on the "+" button to add your first Mailbox!'
+        else
+          filtered = Session.get 'filteredMailboxes'
+          for mb in r
+            filtered[mb.label] = null
 
 initModals = ->
   $('.modal-trigger').leanModal() # init modal triggers
