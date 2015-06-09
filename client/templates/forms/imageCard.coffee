@@ -41,7 +41,7 @@ Template.imgCard.events =
     # fetch Email
     Meteor.call 'Users.fetchMail', accountId, this.email_message_id, (e,r)->
       e = parseCioError e, r
-      console.log e, r
+#      console.log e, r
       if not e?
         Session.set 'emailToShow.mail', r
         content = getPreferredContent r
@@ -66,15 +66,3 @@ getPreferredContent = (mail)->
       return b.content
     else content = b.content
   content
-
-# creates materialboxed image hides it, adds it to a container to be
-# later shown on the card that contains the same fileId
-appendMaterializedBoxedImg = (fileId, imgUri, caption) ->
-  boxed = document.createElement 'img'
-  boxed.src = imgUri
-  $(boxed).attr 'class', 'materialboxed hidden-card-image'
-  $(boxed).attr 'id', "img-materialboxed-#{fileId}"
-  $(boxed).attr 'data-caption', caption
-
-  $('#materialboxed-container').append(boxed)
-  $('.materialboxed').materialbox()

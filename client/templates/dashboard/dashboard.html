@@ -1,4 +1,8 @@
 <template name="dashboard">
+
+    {{> deleteMailboxConfirmModal mailboxToDelete}}
+    {{> emailModal emailToShow}}
+
     <div class="template-dashboard">
         {{> connectMailboxButton account=accountId classes=classesMailboxAdd callbackUrl=callbackUrl label=''  }}
 
@@ -39,8 +43,6 @@
         </div>
     </div>
 
-    {{> deleteMailboxConfirmModal mailboxToDelete}}
-    {{> emailModal emailToShow}}
 
 </template>
 
@@ -107,14 +109,15 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a data-trigger="load-images" href="#!" class="modal-action waves-effect waves-green btn-flat ">Load Images</a>
+            <a data-trigger="load-images" href="#!" class="modal-action waves-effect waves-green btn-flat ">Load
+                Images</a>
             <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-flat ">Close</a>
         </div>
     </div>
 </template>
 
 <template name="mailImage">
-    <img id="mail-img-{{file_id}}" src="images/placeholder.png" />
+    <img id="mail-img-{{file_id}}" class="mail-image" src="images/placeholder.png"/>
 </template>
 
 <template name="waitingSpinner">

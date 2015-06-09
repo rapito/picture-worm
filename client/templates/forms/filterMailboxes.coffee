@@ -29,7 +29,7 @@ AutoForm.hooks
             doc.source = label
             Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
               e = parseCioError e, r
-              console.log e, r
+#              console.log e, r
               if not e?
                 pushFiles r?.body
                 form.done()
