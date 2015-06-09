@@ -24,6 +24,8 @@ AutoForm.hooks
         mailboxes = Session.get 'filteredMailboxes'
         form = this
 
+        methodCalled = false
+
         for label,v of mailboxes
           if mailboxes[label]?
             doc.source = label
@@ -35,10 +37,21 @@ AutoForm.hooks
                 form.done()
                 toggleElementVisibility '#btn-load-more', true
                 Session.set 'currentDoc', doc  # save current query
+
+                files = Session.get 'files'
+                if files?.length == 0
+                  _toast 'No messages found try filtering by something else!'
+
               else
                 console.log e
 
               toggleDisabledElement '#filterMailboxesForm .btn', true # re enable button
+            methodCalled = true
+
+        if not methodCalled
+          _toast 'Choose at least one mailbox to send the worms to!'
+          toggleDisabledElement '#filterMailboxesForm .btn', true # re enable button
+
       catch e
         console.error e
 

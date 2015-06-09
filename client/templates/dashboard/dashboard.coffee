@@ -35,11 +35,11 @@ Template.dashboard.events =
           Session.set 'currentDoc', doc
 
           # hide load more button if no more files
-          if _.isEmpty r?.body
-            toggleElementVisibility '#btn-load-more', false # re-enable button
-            _toast 'No more images!'
-          else  # just enable it
-            toggleDisabledElement '#btn-load-more', true # re-enable button
+#          if _.isEmpty r?.body
+#            toggleElementVisibility '#btn-load-more', false # re-enable button
+#            _toast 'No more images!'
+#          else  # just enable it
+#            toggleDisabledElement '#btn-load-more', true # re-enable button
 
         else
           console.log e
