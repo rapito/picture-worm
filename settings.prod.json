@@ -2,13 +2,14 @@
   "public": {
     "app": {
       "title": "Picture Worm",
-      "version": "0.1.0"
-    },
-    "services": {
-      "contextio": {
-        "key": "1j9gnir6",
-        "secret": "s4fj0FqVHfQX2qC2"
-      }
+      "version": "0.3.0"
+    }
+  },
+  "services": {
+    "contextio": {
+      "key": "1j9gnir6",
+      "secret": "s4fj0FqVHfQX2qC2",
+      "callbackUrl": "http://localhost:3000/api/cb/contextio/connect_tokens/"
     }
   }
 }
