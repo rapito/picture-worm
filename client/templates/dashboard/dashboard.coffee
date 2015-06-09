@@ -122,9 +122,6 @@ Template.emailModal.events =
 
 Template.emailModal.helpers
   date_received: ->
-    console.log this
-    date = moment.unix(this.date_received).format("LLLL")
-    console.log date
     moment.unix(this.date_received).format("LLLL")
 
   content: ->
