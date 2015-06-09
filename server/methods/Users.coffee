@@ -31,7 +31,7 @@ Meteor.methods
 
     result
 
-  'Users.filterMailboxes': (accountId, doc)->
+  'Users.filterMailboxes': (accountId, doc, label)->
     result = cioError 'no accountId or doc passed'
     if accountId?
       doc ?= {}
@@ -51,6 +51,8 @@ Meteor.methods
       doc.sort_order = 'asc'
 
       result = Cio.callAsyncOrSync Cio.client.accounts(accountId).files().get, doc
+      result?.label = label
+      result?.doc = doc
     result
 
   'Users.getFileLink': (accountId, fileId)->

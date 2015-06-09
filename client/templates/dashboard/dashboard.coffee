@@ -23,26 +23,29 @@ Template.dashboard.events =
       id = Session.get 'accountId'
       toggleDisabledElement '#btn-load-more', false # disable load more
 
-      doc = Session.get 'currentDoc' # get currentQuery
-      doc = sanitizeDoc(doc)
-      doc.offset = if doc.offset? then doc.offset + Settings.pageSize else Settings.pageSize # offset to 9 more
+      mailboxes = Session.get 'filteredMailboxes'
+      for label,v of mailboxes
+        doc = Session.get "currentDoc:#{label}" # get currentQuery
+#        console.log doc
+        if doc?
+          doc = sanitizeDoc(doc)
+          doc.offset = if doc.offset? then doc.offset + Settings.pageSize else Settings.pageSize # offset to 9 more
 
-      Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
-        e = parseCioError e, r
-#        console.log e, r
-        if not e?
-          pushFiles r?.body
-          Session.set 'currentDoc', doc
+          Meteor.call 'Users.filterMailboxes', id, doc, label, (e, r)->
+            e = parseCioError e, r
+            #        console.log e, r
+            if not e?
+              pushFiles r?.body
+              Session.set "currentDoc:#{r?.label}", r?.doc
 
-          # hide load more button if no more files
-#          if _.isEmpty r?.body
-#            toggleElementVisibility '#btn-load-more', false # re-enable button
-#            _toast 'No more images!'
-#          else  # just enable it
-#            toggleDisabledElement '#btn-load-more', true # re-enable button
-
-        else
-          console.log e
+              # hide load more button if no more files
+#              if _.isEmpty r?.body
+#                toggleElementVisibility '#btn-load-more', false # re-enable button
+#                _toast 'No more images for '
+#              else  # just enable it
+              toggleDisabledElement '#btn-load-more', true   # re-enable button
+            else
+              console.error e
     catch e
       console.error e
 

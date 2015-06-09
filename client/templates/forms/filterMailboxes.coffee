@@ -29,6 +29,7 @@ AutoForm.hooks
         for label,v of mailboxes
           if mailboxes[label]?
             doc.source = label
+            Session.set "currentDoc:#{label}", doc  # save current query
             Meteor.call 'Users.filterMailboxes', id, doc, (e, r)->
               e = parseCioError e, r
 #              console.log e, r
@@ -36,7 +37,6 @@ AutoForm.hooks
                 pushFiles r?.body
                 form.done()
                 toggleElementVisibility '#btn-load-more', true
-                Session.set 'currentDoc', doc  # save current query
 
                 files = Session.get 'files'
                 if files?.length == 0
