@@ -10,6 +10,9 @@
 
   result
 
+@safeArray = (obj) ->
+  result = if _.isArray(obj) then obj else []
+  result
 
 @toggleDisabledElement = (element, enable)->
   if _.isString element
@@ -54,5 +57,29 @@
 
   doc
 
-@toast = (message)->
-  Materialize.toast(message, Settings.toastTimeout)
+@_toast = (message)->
+  toast(message, Settings.toastTimeout)
+
+@deleteMailboxFromArray = (str)->
+  mbs = Session.get 'mailboxes'
+  result = []
+
+  for s in mbs
+    if s.label != str
+      result.push s
+
+  Session.set 'mailboxes', result
+  mbs
+
+# creates materialboxed image hides it, adds it to a container to be
+# later shown on the card that contains the same fileId
+@appendMaterializedBoxedImg = (fileId, imgUri, caption) ->
+  boxed = document.createElement 'img'
+  boxed.src = imgUri
+  $(boxed).attr 'class', 'materialboxed hidden-card-image'
+  $(boxed).attr 'id', "img-materialboxed-#{fileId}"
+  $(boxed).attr 'data-caption', caption
+
+  $('#materialboxed-container').append(boxed)
+  $('.materialboxed').materialbox()
+

@@ -15,6 +15,7 @@ callback-hook@1.0.3
 check@1.0.5
 cmather:handlebars-server@0.2.0
 coffeescript@1.0.6
+copleykj:livestamp@1.1.7
 cunneen:mailgun@0.9.1
 dburles:collection-helpers@1.0.2
 dburles:factory@0.3.7

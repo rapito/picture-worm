@@ -66,3 +66,23 @@ Meteor.methods
         url: result?.body
 
     result
+
+  'Users.deleteMailbox': (accountId, label)->
+    result = cioError 'no accountId or label passed'
+
+    if accountId? and label?
+      result = Cio.callAsyncOrSync Cio.client.accounts(accountId).sources(label).delete, {}
+      result = result?.body
+
+    result
+
+  'Users.fetchMail': (accountId, messageId)->
+    result = cioError 'no accountId or messageId passed'
+    params =
+      include_body: 1
+
+    if accountId? and messageId?
+      result = Cio.callAsyncOrSync Cio.client.accounts(accountId).messages(messageId).get, params
+      result = result?.body
+
+    result

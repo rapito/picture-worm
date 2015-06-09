@@ -28,15 +28,41 @@ Template.imgCard.events =
   'click .card-image': (evt)->
     $("#img-materialboxed-#{this.file_id}").click();
 
+  'click .mail-trigger': (evt)->
+    Session.set 'emailToShow', this
+    Session.set 'emailToShow.images', []
+    delete Session.keys['emailToShow.mail']
+    delete Session.keys['emailToShow.content']
 
-# creates materialboxed image hides it, adds it to a container to be
-# later shown on the card that contains the same fileId
-appendMaterializedBoxedImg = (fileId, imgUri, caption) ->
-  boxed = document.createElement 'img'
-  boxed.src = imgUri
-  $(boxed).attr 'class', 'materialboxed hidden-card-image'
-  $(boxed).attr 'id', "img-materialboxed-#{fileId}"
-  $(boxed).attr 'data-caption', caption
+    $('.mail-trigger').leanModal();
+    $('#modal-email').openModal();
 
-  $('#materialboxed-container').append(boxed)
-  $('.materialboxed').materialbox()
+    accountId = Session.get 'accountId'
+    # fetch Email
+    Meteor.call 'Users.fetchMail', accountId, this.email_message_id, (e,r)->
+      e = parseCioError e, r
+#      console.log e, r
+      if not e?
+        Session.set 'emailToShow.mail', r
+        content = getPreferredContent r
+        Session.set 'emailToShow.content', content
+        images = getImages r
+        Session.set 'emailToShow.images', images
+
+
+# extracts all images from the
+getImages = (mail)->
+  result = []
+  for f in mail?.files
+    if f.type.indexOf('image/') > -1
+      result.push f
+  result
+
+# extracts mail body from mail object, looks for any text/html first
+getPreferredContent = (mail)->
+  content = '<p>Loading Content</p>'
+  for b in mail?.body
+    if b.type == 'text/html'
+      return b.content
+    else content = b.content
+  content
