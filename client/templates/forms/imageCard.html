@@ -7,8 +7,13 @@
             </div>
             {{> spinner}}
             <div class="card-content">
-                <b class="truncate">{{subject}}</b>
-                <abbr class="right" title="{{file_name}}" data-livestamp="{{date_received}}"></abbr>
+                <div class="s12">
+                    <b class="s6 truncate">{{subject}}</b>
+                    <abbr class="s6 right" title="{{file_name}}" data-livestamp="{{date_received}}"></abbr>
+                </div>
+                <div class="s12">
+                    <a href="#modal-email" class="mail-trigger"><i class="mdi-content-mail"></i></a>
+                </div>
             </div>
         </div>
     </div>

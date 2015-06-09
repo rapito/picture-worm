@@ -75,3 +75,14 @@ Meteor.methods
       result = result?.body
 
     result
+
+  'Users.fetchMail': (accountId, messageId)->
+    result = cioError 'no accountId or messageId passed'
+    params =
+      include_body: 1
+
+    if accountId? and messageId?
+      result = Cio.callAsyncOrSync Cio.client.accounts(accountId).messages(messageId).get, params
+      result = result?.body
+
+    result
