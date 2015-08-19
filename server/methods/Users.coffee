@@ -9,11 +9,13 @@ Meteor.methods
     getAccountId userId
 
   'Users.connectTokens': (userId, accountId, token)->
+#    accountId =
     if not accountId or not token
       console.error 'no accountId nor token? wth dude?'
       return
 
     source = Cio.connectTokensSimple accountId, token
+#    accountId =
 
     user = Meteor.user()
     user.services?.contextio?.sources?.push
@@ -24,6 +26,7 @@ Meteor.methods
     source
 
   'Users.getMailboxes': (accountId)->
+#    accountId =
     result = cioError 'no accountId passed'
     if accountId
       result = Cio.callAsyncOrSync(Cio.client.accounts(accountId).sources().get)
@@ -32,6 +35,7 @@ Meteor.methods
     result
 
   'Users.filterMailboxes': (accountId, doc, label)->
+#    accountId =
     result = cioError 'no accountId or doc passed'
     if accountId?
       doc ?= {}
@@ -56,6 +60,7 @@ Meteor.methods
     result
 
   'Users.getFileLink': (accountId, fileId)->
+#    accountId =
     result = cioError 'no accountId or fileId passed'
 
     if accountId? and fileId?
@@ -70,6 +75,7 @@ Meteor.methods
     result
 
   'Users.deleteMailbox': (accountId, label)->
+#    accountId =
     result = cioError 'no accountId or label passed'
 
     if accountId? and label?
@@ -79,6 +85,7 @@ Meteor.methods
     result
 
   'Users.fetchMail': (accountId, messageId)->
+#    accountId =
     result = cioError 'no accountId or messageId passed'
     params =
       include_body: 1

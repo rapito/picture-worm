@@ -20,6 +20,7 @@ AutoForm.hooks
         toggleDisabledElement '#filterMailboxesForm .btn', false # disable button
         toggleElementVisibility('#btn-load-more', false) # hide load more button
         doc = sanitizeDoc doc
+        console.log doc, form
 
         mailboxes = Session.get 'filteredMailboxes'
         form = this
@@ -55,4 +56,6 @@ AutoForm.hooks
       catch e
         console.error e
 
+      form.resetForm()
+      doc = null
       false
