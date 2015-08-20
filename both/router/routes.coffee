@@ -1,6 +1,14 @@
 Router.route '/',
   name: 'home'
 
+Router.route '/ToS',
+  name: 'tos'
+  layoutTemplate: 'appLayout'
+
+Router.route '/Privacy',
+  name: 'privacy'
+  layoutTemplate: 'appLayout'
+
 Router.route '/dashboard',
   name: 'dashboard'
 
